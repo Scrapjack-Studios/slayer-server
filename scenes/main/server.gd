@@ -29,6 +29,16 @@ func start_server():
 	network.connect("peer_connected", self, "on_peer_connected")
 	network.connect("peer_disconnected", self, "on_peer_disconnected")
 
+func close_server():
+	for player in players:
+		kick_player(player, "Server Closed")
+	emit_signal("server_stopped")
+	get_tree().set_network_peer(null)
+
+func kick_player(player, reason):
+	rpc_id(player, "kicked", reason)
+	get_tree().network_peer.disconnect_peer(player)
+
 func on_peer_connected(player_id):
 	print("User " + str(player_id) + " connected.")
 
