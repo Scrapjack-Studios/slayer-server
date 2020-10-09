@@ -41,26 +41,16 @@ func kick_player(player, reason):
 func update_position(id, position):
 	players[id].position = position
 
-func on_player_connected(connected_player_id): 
-	connected_player = connected_player_id
-	var local_player_id = get_tree().get_network_unique_id()
-	rpc_id(1, '_request_player_info', local_player_id, connected_player_id)
-	rpc_id(1, '_request_map', local_player_id)
+func on_player_connected(id): 
+	print(str(id) + " connected.")
+	rpc_id(id, "fetch_player_info")
 
 func on_player_disconnected(id):
 	disconnected_player_info = players[id]
 	players.erase(id)
-	  
-#remote func _request_player_info(request_from_id, player_id):
-#	if get_tree().is_network_server():
-#		rpc_id(request_from_id, '_send_player_info', player_id, players[player_id])
-#
-#remote func _send_player_info(id, info):
-#	players[id] = info
-#	if connected_player in players:
-#		connected_player_info = players[connected_player]
-#		emit_signal("player_connection_completed")
-#
+
+remote func recieve_player_info(id, info):
+	print(info)
 #remote func _request_players(request_from_id):
 #	if get_tree().is_network_server():
 #		rpc_id(request_from_id, '_send_players', players)
