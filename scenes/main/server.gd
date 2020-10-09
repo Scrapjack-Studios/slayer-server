@@ -4,6 +4,20 @@ var network = NetworkedMultiplayerENet.new()
 var port = 4000
 var max_players = 100
 
+var players = { }
+var start_position = Vector2(360,180)
+var self_data = {name = '', position = Vector2(), received_disconnect=false}
+var disconnected_player_info
+var connected_player_info
+var connected_player
+var disconnected
+
+signal player_disconnected
+signal server_disconnected
+signal player_connection_completed
+signal player_disconnection_completed
+signal server_stopped
+
 func _ready() -> void:
 	start_server()
 
