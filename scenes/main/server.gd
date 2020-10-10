@@ -44,13 +44,19 @@ func update_position(id, position):
 func on_player_connected(id): 
 	print(str(id) + " connected.")
 	rpc_id(id, "fetch_player_info")
+	rpc_id(id, "receive_game_data", DEFAULT_MAP)
 
 func on_player_disconnected(id):
 	disconnected_player_info = players[id]
 	players.erase(id)
 
-remote func recieve_player_info(id, info):
+remote func receive_player_info(id, info):
 	print(info)
+
+
+
+
+
 #remote func _request_players(request_from_id):
 #	if get_tree().is_network_server():
 #		rpc_id(request_from_id, '_send_players', players)
