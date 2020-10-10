@@ -51,7 +51,8 @@ func on_player_disconnected(id):
 	players.erase(id)
 
 remote func get_player_info(id, info):
-	print(info)
+	players[id] = info
+	print(players)
 
 
 
