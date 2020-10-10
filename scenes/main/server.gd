@@ -44,13 +44,13 @@ func update_position(id, position):
 func on_player_connected(id): 
 	print(str(id) + " connected.")
 	rpc_id(id, "fetch_player_info")
-	rpc_id(id, "receive_game_data", DEFAULT_MAP)
+	rpc_id(id, "get_map", DEFAULT_MAP)
 
 func on_player_disconnected(id):
 	disconnected_player_info = players[id]
 	players.erase(id)
 
-remote func receive_player_info(id, info):
+remote func get_player_info(id, info):
 	print(info)
 
 
