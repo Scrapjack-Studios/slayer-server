@@ -45,6 +45,7 @@ func on_player_connected(id):
 	print(str(id) + " connected.")
 	rpc_id(id, "fetch_player_info")
 	rpc_id(id, "get_map", DEFAULT_MAP)
+	rpc_id(id, "get_start_position", start_position)
 
 func on_player_disconnected(id):
 	disconnected_player_info = players[id]
@@ -54,22 +55,3 @@ remote func get_player_info(id, info):
 	players[id] = info
 	rpc("get_players_list", players)
 	print(players)
-
-
-
-
-
-#remote func _request_players(request_from_id):
-#	if get_tree().is_network_server():
-#		rpc_id(request_from_id, '_send_players', players)
-#
-#remote func _send_players(players_array):
-#	players = players_array
-#
-#remote func _request_map(request_from_id):
-#	if get_tree().is_network_server():
-#		rpc_id(request_from_id, '_send_map', Global.map)
-#
-#remote func _send_map(map):
-#	Global.map = map
-#	get_tree().change_scene("res://GameController.tscn")
