@@ -53,5 +53,6 @@ func on_player_disconnected(id):
 
 remote func get_player_info(id, info):
 	players[id] = info
-	rpc("get_players_list", players)
+	rpc("get_players_list", players) # gives the new player the current list of players
+	$Players.add_player(id)
 	print(players)

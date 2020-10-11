@@ -19,6 +19,10 @@ config/name="Slayer Server"
 run/main_scene="res://scenes/main/server.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameController="*res://scenes/main/game_controller.tscn"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
