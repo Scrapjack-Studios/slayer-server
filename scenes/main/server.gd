@@ -6,17 +6,13 @@ const DEFAULT_PORT = 4000
 const MAX_PLAYERS = 100
 
 var network = NetworkedMultiplayerENet.new()
-var players = { }
+var players = {}
 var start_position = Vector2(360,180)
 var disconnected_player_info
 var connected_player_info
 var connected_player
 var disconnected
 
-signal player_disconnected
-signal server_disconnected
-signal player_connection_completed
-signal player_disconnection_completed
 signal server_stopped
 
 func _ready() -> void:
@@ -51,8 +47,10 @@ func on_player_disconnected(id):
 	disconnected_player_info = players[id]
 	players.erase(id)
 
+# gets called by the player when they connect
 remote func get_player_info(id, info):
-	players[id] = info
-	rpc("get_players_list", players) # gives the new player the current list of players
+	players[id] = info # add to players dict
+	rpc("get_players_list", players) # updates everyone's player list
+	get_node("/root/GameController").rpc_id(id, "spawn", id, info)
 	$Players.add_player(id)
 	print(players)
