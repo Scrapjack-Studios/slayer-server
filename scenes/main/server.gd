@@ -51,7 +51,7 @@ func on_player_disconnected(id):
 # gets called by the player when they connect
 remote func get_player_info(id, info):
 	players[id] = info # add to players dict
-	rpc("get_players_list", players) # updates everyone's player list
-	get_node("/root/GameController").rpc_id(id, "spawn", id, info)
 	$Players.add_player(id)
+	rpc("get_players_list", players) # updates everyone's player list
+	get_node("/root/GameController").rpc("spawn", id, info)
 	print(players)
