@@ -53,5 +53,5 @@ remote func get_player_info(id, info):
 	players[id] = info # add to players dict
 	$Players.add_player(id)
 	rpc("get_players_list", players) # updates everyone's player list
-	get_node("/root/GameController").rpc("spawn", id, info)
+	get_node("/root/GameController").rpc_id(id, "spawn", id, info)
 	print(players)
