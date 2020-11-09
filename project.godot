@@ -23,6 +23,11 @@ config/icon="res://icon.png"
 
 GameController="*res://scenes/main/game_controller.tscn"
 
+[debug]
+
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
