@@ -1,9 +1,8 @@
 extends Node
 
-const DEFAULT_IP = "192.168.1.195"
-const DEFAULT_MAP = "ShootingRange"
 const DEFAULT_PORT = 4000
-const MAX_PLAYERS = 100
+const DEFAULT_MAX_PLAYERS = 100
+const DEFAULT_MAP = "ShootingRange"
 
 var network = NetworkedMultiplayerENet.new()
 var players = {}
@@ -18,10 +17,10 @@ signal server_stopped
 func _ready() -> void:
 	get_tree().connect('network_peer_connected', self, 'on_player_connected')
 	get_tree().connect('network_peer_disconnected', self, 'on_player_disconnected')
-	create_server(DEFAULT_PORT)
+	create_server(DEFAULT_PORT, DEFAULT_MAX_PLAYERS)
 
-func create_server(port):
-	network.create_server(port, MAX_PLAYERS)
+func create_server(port, max_players):
+	network.create_server(port, max_players)
 	get_tree().set_network_peer(network)
 
 func close_server():
