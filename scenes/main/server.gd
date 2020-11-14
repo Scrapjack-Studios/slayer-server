@@ -40,7 +40,7 @@ func on_player_connected(id):
 
 func on_player_disconnected(id):
 	print(str(id) + " disconnected.")
-	$Players.call_deferred("prune_player", id)
+	$Players.prune_player(id)
 
 # gets called by the player when they connect
 remote func get_player_info(id, info):
