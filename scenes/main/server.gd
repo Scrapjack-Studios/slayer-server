@@ -7,10 +7,6 @@ const DEFAULT_MAP = "ShootingRange"
 var network = NetworkedMultiplayerENet.new()
 var players = {}
 var start_position = Vector2(360,180)
-var disconnected_player_info
-var connected_player_info
-var connected_player
-var disconnected
 
 signal server_stopped
 
@@ -44,7 +40,6 @@ func on_player_connected(id):
 
 func on_player_disconnected(id):
 	print(str(id) + " disconnected.")
-	disconnected_player_info = players[id]
 	$Players.call_deferred("prune_player", id)
 
 # gets called by the player when they connect
