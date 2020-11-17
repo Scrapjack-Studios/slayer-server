@@ -9,12 +9,10 @@ var hit_pos
 var weapon_type
 
 func start_at(pos, dir, type, dmg, _lifetime, size, spd):
-	$Sprite.animation = type
 	position = pos
 	rotation = dir
-	$Explosion.set_scale(Vector2(0.1,0.1))
-	$Sprite.set_scale(size)
+#	$Sprite.set_scale(size)
 	damage = dmg
 	velocity = Vector2(speed, 0).rotated(dir)
-	add_to_group("bullets")
+#	add_to_group("bullets")
 	speed = spd

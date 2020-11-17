@@ -19,23 +19,23 @@ remote func spawn_projectile(type, pos, rot):
 				var pellet = Bullet.instance()
 				pellet.start_at(pos, rot + rand_range(-0.04,0.04),'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
 				$Bullets.add_child(pellet)
-				if not is_network_master():
-					pellet.set_collision_layer_bit(6, true)
+#				if not is_network_master():
+#					pellet.set_collision_layer_bit(6, true)
 		"burst_fire":
 			var bullet = Bullet.instance()
 			bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
 			$Bullets.add_child(bullet)
-			if not is_network_master():
-				bullet.set_collision_layer_bit(6, true)
+#			if not is_network_master():
+#				bullet.set_collision_layer_bit(6, true)
 		"auto":
 			var bullet = Bullet.instance()
 			bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
 			$Bullets.add_child(bullet)
-			if not is_network_master():
-				bullet.set_collision_layer_bit(6, true)
+#			if not is_network_master():
+#				bullet.set_collision_layer_bit(6, true)
 		"semi_auto":
 			var bullet = Bullet.instance()
 			bullet.start_at(pos, rot,'black', dmg, bullet_lifetime, bullet_size, bullet_speed)
 			$Bullets.add_child(bullet)
-			if not is_network_master():
-				bullet.set_collision_layer_bit(6, true)
+#			if not is_network_master():
+#				bullet.set_collision_layer_bit(6, true)
