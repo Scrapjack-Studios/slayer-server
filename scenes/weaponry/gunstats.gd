@@ -1,6 +1,6 @@
 extends Node2D
 
-var Bullet = load("res://scenes/main/bullet.tscn")
+var Bullet = load("res://scenes/weaponry/bullet.tscn")
 
 var shotgun_pellets
 var shotgun_spread
