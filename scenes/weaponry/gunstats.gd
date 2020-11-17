@@ -2,6 +2,7 @@ extends Node2D
 
 var Bullet = load("res://scenes/weaponry/bullet.tscn")
 
+# TODO: these need to be rset for now
 var shotgun_pellets
 var shotgun_spread
 var dmg
