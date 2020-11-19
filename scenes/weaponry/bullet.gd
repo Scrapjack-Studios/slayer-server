@@ -8,7 +8,7 @@ var damage
 var hit_pos
 var weapon_type
 
-func start_at(pos, dir, type, dmg, _lifetime, size, spd):
+func spawn_projectile(pos, dir, type, dmg, _lifetime, size, spd):
 	position = pos
 	rotation = dir
 #	$Sprite.set_scale(size)
