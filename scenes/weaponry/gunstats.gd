@@ -11,15 +11,15 @@ puppet var puppet_shotgun_pellets
 puppet var puppet_shotgun_spread
 puppet var puppet_burst_ammount
 
-remote func fire(type):
+remote func fire(type, pos, rot):
 	match type:
 		"shotgun":
 			for puppet_shotgun_pellet in puppet_shotgun_pellets:
 				puppet_shotgun_spread =+ 0.5
 				var pellet = Bullet.instance()
 				pellet.spawn_projectile(
-					get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-					get_parent().global_rotation + rand_range(-0.04,0.04),
+					pos, 
+					rot + rand_range(-0.04,0.04),
 					"black",
 					puppet_dmg,
 					puppet_bullet_lifetime, 
@@ -31,8 +31,8 @@ remote func fire(type):
 			for b in puppet_burst_ammount: 
 				var bullet = Bullet.instance()
 				bullet.spawn_projectile(
-					get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-					get_parent().global_rotation,
+					pos, 
+					rot,
 					"black",
 					puppet_dmg, 
 					puppet_bullet_lifetime, 
@@ -43,9 +43,8 @@ remote func fire(type):
 		"automatic":
 			var bullet = Bullet.instance()
 			bullet.spawn_projectile(
-				"spawn_projectile",
-				get_parent().get_node("Weapon_Sprite/Muzzle").global_position, 
-				get_parent().global_rotation,
+				pos, 
+				rot,
 				"black",
 				puppet_dmg, 
 				puppet_bullet_lifetime, 
@@ -56,8 +55,8 @@ remote func fire(type):
 		"semi_auto":
 			var bullet = Bullet.instance()
 			bullet.spawn_projectile(
-				get_parent().get_node("Weapon_Sprite/Muzzle").global_position,
-				get_parent().global_rotation,
+				pos,
+				rot,
 				"black",
 				puppet_dmg,
 				puppet_bullet_lifetime,
