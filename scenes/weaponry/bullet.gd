@@ -8,7 +8,8 @@ var damage
 var hit_pos
 var weapon_type
 
-func spawn_projectile(pos, dir, type, dmg, _lifetime, size, spd):
+remote func spawn_projectile(pos, dir, type, dmg, _lifetime, size, spd):
+	print("Projectile spawned!")
 	position = pos
 	rotation = dir
 #	$Sprite.set_scale(size)
