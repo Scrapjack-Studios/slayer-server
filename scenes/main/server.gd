@@ -36,16 +36,16 @@ func on_player_connected(id):
 	print(str(id) + " connected.")
 	rpc_id(id, "fetch_player_info")
 	rpc_id(id, "get_map", DEFAULT_MAP)
-	rpc_id(id, "get_start_position", start_position)
 
 func on_player_disconnected(id):
 	print(str(id) + " disconnected.")
 	$Players.prune_player(id)
+	rpc_id(id, "despawn_player", id)
 
 # gets called by the player when they connect
 remote func get_player_info(id, info):
 	players[id] = info # add to players dict
 	$Players.add_player(id)
 	rpc("get_players_list", players) # updates everyone's player list
-	get_node("/root/GameController").rpc_id(id, "spawn", id, info)
+	rpc_id(id, "spawn_player", id, info, start_position)
 	print(players)
