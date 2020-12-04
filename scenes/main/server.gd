@@ -6,7 +6,7 @@ const DEFAULT_MAP = "ShootingRange"
 
 var network = NetworkedMultiplayerENet.new()
 var players = {}
-var start_position = Vector2(360,180)
+var start_position = Vector2(448,863)
 
 signal server_stopped
 
@@ -29,9 +29,6 @@ func kick_player(player, reason):
 	rpc_id(player, "kicked", reason)
 	get_tree().network_peer.disconnect_peer(player)
 
-func update_position(id, position):
-	players[id].position = position
-
 func on_player_connected(id): 
 	print(str(id) + " connected.")
 	rpc_id(id, "fetch_player_info")
@@ -40,12 +37,12 @@ func on_player_connected(id):
 func on_player_disconnected(id):
 	print(str(id) + " disconnected.")
 	$Players.prune_player(id)
-	rpc_id(id, "despawn_player", id)
+	rpc("despawn_player", id)
 
 # gets called by the player when they connect
 remote func get_player_info(id, info):
 	players[id] = info # add to players dict
 	$Players.add_player(id)
 	rpc("get_players_list", players) # updates everyone's player list
-	rpc_id(id, "spawn_player", id, info, start_position)
+	rpc("spawn_player", id, info, start_position)
 	print(players)
