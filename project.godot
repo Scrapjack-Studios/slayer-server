@@ -16,12 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Slayer Server"
-run/main_scene="res://scenes/main/server.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://src/main/server.tscn"
+config/icon="res://src/icon.png"
 
 [autoload]
 
-GameController="*res://scenes/main/game_controller.tscn"
+GameController="*res://src/main/game_controller.tscn"
 
 [debug]
 
@@ -30,4 +30,4 @@ gdscript/warnings/return_value_discarded=false
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://src/default_env.tres"

@@ -34,8 +34,10 @@ func on_player_connected(id):
 
 func on_player_disconnected(id):
 	print(str(id) + " disconnected.")
-	$Players.prune_player(id)
-	rpc("despawn_player", id)
+	if $Players.has_node(str(id)):
+		player_state_collection.erase(id)
+		$Players.prune_player(id)
+		rpc("despawn_player", id)
 
 # gets called by the player after they received the game info
 remote func received_game_info():
