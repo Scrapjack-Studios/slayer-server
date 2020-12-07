@@ -30,15 +30,20 @@ func kick_player(player, reason):
 func on_player_connected(id): 
 	print(str(id) + " connected.")
 	$Players.add_player(id)
-	rpc_id(id, "get_map", DEFAULT_MAP)
-	rpc("spawn_player", id, start_position)
+	rpc_id(id, "get_game_info", DEFAULT_MAP)
 
 func on_player_disconnected(id):
 	print(str(id) + " disconnected.")
 	$Players.prune_player(id)
 	rpc("despawn_player", id)
 
-remote func get_player_state(id, state):
+# gets called by the player after they received the game info
+remote func received_game_info():
+	var id = get_tree().get_rpc_sender_id()
+	rpc("spawn_player", id, start_position)
+
+remote func get_player_state(state):
+	var id = get_tree().get_rpc_sender_id()
 	if player_state_collection.has(id):
 		if player_state_collection[id]["T"] < state["T"]: # check if the state is the latest
 			player_state_collection[id] = state
