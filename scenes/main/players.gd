@@ -7,5 +7,4 @@ func add_player(id):
 	GameController.add_child(player)
 	
 func prune_player(id):
-	get_node("/root/Server").players.erase(id)
 	GameController.get_node(str(id)).queue_free()
