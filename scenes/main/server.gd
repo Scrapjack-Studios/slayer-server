@@ -18,8 +18,8 @@ func create_server(port, max_players):
 	get_tree().set_network_peer(network)
 
 func close_server():
-#	for player in players:
-#		kick_player(player, "Server Closed")
+	for player in $Players:
+		kick_player(player, "Server Closed")
 	emit_signal("server_stopped")
 	get_tree().set_network_peer(null)
 
@@ -29,20 +29,18 @@ func kick_player(player, reason):
 
 func on_player_connected(id): 
 	print(str(id) + " connected.")
-	rpc_id(id, "fetch_player_info")
+	$Players.add_player(id)
 	rpc_id(id, "get_map", DEFAULT_MAP)
+	rpc("spawn_player", id, start_position)
 
 func on_player_disconnected(id):
 	print(str(id) + " disconnected.")
 	$Players.prune_player(id)
 	rpc("despawn_player", id)
 
-remote func get_player_state(player_id, player_state):
-	if player_state_collection.has(player_id):
-		if player_state_collection[player_id]["T"] < player_state["T"]:
-			player_state_collection[player_id] = player_state
-
-# gets called by the player when they connect
-remote func get_player_info(id):
-	$Players.add_player(id)
-	rpc("spawn_player", id, start_position)
+remote func get_player_state(id, state):
+	if player_state_collection.has(id):
+		if player_state_collection[id]["T"] < state["T"]: # check if the state is the latest
+			player_state_collection[id] = state
+	else:
+		player_state_collection[id] = state
