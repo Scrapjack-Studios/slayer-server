@@ -6,6 +6,7 @@ const DEFAULT_MAP = "ShootingRange"
 
 var network = NetworkedMultiplayerENet.new()
 var players = {}
+var player_state_collection = {}
 var start_position = Vector2(448,863)
 
 signal server_stopped
@@ -38,6 +39,11 @@ func on_player_disconnected(id):
 	print(str(id) + " disconnected.")
 	$Players.prune_player(id)
 	rpc("despawn_player", id)
+
+remote func get_player_state(player_id, player_state):
+	if player_state_collection.has(player_id):
+		if player_state_collection[player_id]["T"] < player_state["T"]:
+			player_state_collection[player_id] = player_state
 
 # gets called by the player when they connect
 remote func get_player_info(id, info):
