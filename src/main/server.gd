@@ -18,7 +18,7 @@ func create_server(port, max_players):
 	get_tree().set_network_peer(network)
 
 func close_server():
-	for player in $Players:
+	for player in GameController.get_node("Players"):
 		kick_player(player, "Server Closed")
 	emit_signal("server_stopped")
 	get_tree().set_network_peer(null)
@@ -29,14 +29,14 @@ func kick_player(player, reason):
 
 func on_player_connected(id): 
 	print(str(id) + " connected.")
-	$Players.add_player(id)
+	$PlayerProcessing.add_player(id)
 	rpc_id(id, "get_game_info", DEFAULT_MAP)
 
 func on_player_disconnected(id):
 	print(str(id) + " disconnected.")
-	if $Players.has_node(str(id)):
+	if GameController.get_node("Players").has_node(str(id)):
 		player_state_collection.erase(id)
-		$Players.prune_player(id)
+		$PlayerProcessing.prune_player(id)
 		rpc("despawn_player", id)
 
 func send_world_state(world_state):
