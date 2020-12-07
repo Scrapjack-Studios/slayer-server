@@ -39,10 +39,8 @@ func on_player_disconnected(id):
 		$Players.prune_player(id)
 		rpc("despawn_player", id)
 
-# gets called by the player after they received the game info
-remote func received_game_info():
-	var id = get_tree().get_rpc_sender_id()
-	rpc("spawn_player", id, start_position)
+func send_world_state(world_state):
+	rpc_unreliable("get_world_state", world_state)
 
 remote func get_player_state(state):
 	var id = get_tree().get_rpc_sender_id()
@@ -51,3 +49,8 @@ remote func get_player_state(state):
 			player_state_collection[id] = state
 	else:
 		player_state_collection[id] = state
+
+# gets called by the player after they received the game info
+remote func received_game_info():
+	var id = get_tree().get_rpc_sender_id()
+	rpc("spawn_player", id, start_position)

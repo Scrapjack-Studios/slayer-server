@@ -28,6 +28,10 @@ GameController="*res://src/main/game_controller.tscn"
 gdscript/warnings/unused_signal=false
 gdscript/warnings/return_value_discarded=false
 
+[physics]
+
+common/physics_fps=20
+
 [rendering]
 
 environment/default_environment="res://src/default_env.tres"
