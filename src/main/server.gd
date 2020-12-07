@@ -42,15 +42,15 @@ func on_player_disconnected(id):
 func send_world_state(world_state):
 	rpc_unreliable("get_world_state", world_state)
 
-remote func get_player_state(state):
+remote func get_player_state(player_state):
 	var id = get_tree().get_rpc_sender_id()
 	if player_state_collection.has(id):
-		if player_state_collection[id]["T"] < state["T"]: # check if the state is the latest
-			player_state_collection[id] = state
+		if player_state_collection[id]["T"] < player_state["T"]: # check if player state is up-to-date
+			player_state_collection[id] = player_state
 	else:
-		player_state_collection[id] = state
+		player_state_collection[id] = player_state
 
-# gets called by the player after they received the game info
+# gets called by player after they received the game info
 remote func received_game_info():
 	var id = get_tree().get_rpc_sender_id()
 	rpc("spawn_player", id, start_position)

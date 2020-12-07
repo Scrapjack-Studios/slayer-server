@@ -1,6 +1,6 @@
 extends Node2D
 
-var Bullet = load("res://scenes/weaponry/bullet.tscn")
+var Bullet = load("res://src/weaponry/bullet.tscn")
 
 # TODO: these need to be rset for now
 puppet var puppet_dmg
