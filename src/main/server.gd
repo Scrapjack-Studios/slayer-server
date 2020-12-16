@@ -28,12 +28,12 @@ func kick_player(player, reason):
 	get_tree().network_peer.disconnect_peer(player)
 
 func on_player_connected(id): 
-	print(str(id) + " connected.")
+	print("Player " +  str(id) + " connected")
 	$PlayerProcessing.add_player(id)
 	rpc_id(id, "get_game_info", DEFAULT_MAP)
 
 func on_player_disconnected(id):
-	print(str(id) + " disconnected.")
+	print("Player " + str(id) + " disconnected")
 	if GameController.get_node("Players").has_node(str(id)):
 		player_state_collection.erase(id)
 		$PlayerProcessing.prune_player(id)
