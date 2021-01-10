@@ -54,3 +54,11 @@ remote func get_player_state(player_state):
 remote func received_game_info():
 	var id = get_tree().get_rpc_sender_id()
 	rpc("spawn_player", id, start_position)
+
+remote func fetch_server_time(client_time):
+	var requester_id = get_tree().get_rpc_sender_id()
+	rpc_id(requester_id, "return_server_time", OS.get_system_time_msecs(), client_time)
+
+remote func fetch_latency(client_time):
+	var requester_id = get_tree().get_rpc_sender_id()
+	rpc_id(requester_id, "return_latency", client_time)
